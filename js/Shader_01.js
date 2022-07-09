@@ -45,12 +45,19 @@ const prog1 = {
 			gl_FragColor.rgb += specular * uLightColor;
 		}
 	`,
-	camMatrix: m4.lookAt([-100, 50, 50], [-100, 50, -100]), fieldOfView: Math.PI/180 * 72, lightPos: [0, 100, 0], lightDir: [0, -1, 0],
+	camMatrix: m4.lookAt([-100, 50, 50], [-100, 50, -100]), fieldOfView: Math.PI/180 * 72,
+	lightPos: [0, 100, 0], lightDir: [0, -1, 0],
 	vertCount: 0,
-	unifStrings: [
-		{categ: 'mtrx4', strngs: [{strng: 'uWorld', val: m4.identity()}, {strng: 'uViewProj', val: m4.identity()}, {strng: 'uWorldInvTrans', val: m4.identity()}]},
-		{categ: 'vctr3', strngs: [{strng: 'uViewWorldPos', val: [0, 0, 0]}, {strng: 'uLightWorldPos', val: [0, 0, 0]}, {strng: 'uLightColor', val: [1, 1, 1]}, {strng: 'uLightDir', val: [0, 1, 0]}]},
-		{categ: 'flt1', strngs: [{strng: 'uLightRad', val: Math.cos(Math.PI/2)}, {strng: 'uShine', val: 125.0}]}
-	],
-	attrStrings: [{strng: 'aPosition', data: []}, {strng: 'aNormal', data: []}, {strng: 'aColor', data: []}],
+	unifStrings: [{categ: 'mtrx4', strngs: [{strng: 'uWorld', val: m4.identity()},
+																					{strng: 'uViewProj', val: m4.identity()},
+																					{strng: 'uWorldInvTrans', val: m4.identity()}]},
+								{categ: 'vctr3', strngs: [{strng: 'uViewWorldPos', val: [0, 0, 0]},
+																					{strng: 'uLightWorldPos', val: [0, 0, 0]},
+																					{strng: 'uLightColor', val: [1, 1, 1]},
+																					{strng: 'uLightDir', val: [0, 1, 0]}]},
+								{categ: 'flt1', strngs: [{strng: 'uLightRad', val: Math.cos(Math.PI/2)},
+																					{strng: 'uShine', val: 125.0}]}],
+	attrStrings: [{strng: 'aPosition', data: []},
+								{strng: 'aNormal', data: []},
+								{strng: 'aColor', data: []}],
 };

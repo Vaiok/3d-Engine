@@ -37,107 +37,75 @@ function keyUp(e) {
 }
 // Control Loop Function
 // 0
-function updatePos(program, objsArr, deltaTime) {
-	//
-	if (cntrl.moveLeft) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(-250*deltaTime, 0, 0));}
-	if (cntrl.moveRight) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(250*deltaTime, 0, 0));}
-	if (cntrl.moveDown) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(0, -250*deltaTime, 0));}
-	if (cntrl.moveUp) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(0, 250*deltaTime, 0));}
-	if (cntrl.moveBackward) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(0, 0, 250*deltaTime));}
-	if (cntrl.moveForward) {program.camMatrix = m4.multiply(program.camMatrix, m4.translate(0, 0, -250*deltaTime));}
-	if (cntrl.turnDown) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateX(-Math.PI/6*deltaTime));}
-	if (cntrl.turnUp) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateX(Math.PI/6*deltaTime));}
-	if (cntrl.turnLeft) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateY(-Math.PI/6*deltaTime));}
-	if (cntrl.turnRight) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateY(Math.PI/6*deltaTime));}
-	if (cntrl.spinLeft) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateZ(-Math.PI/6*deltaTime));}
-	if (cntrl.spinRight) {program.camMatrix = m4.multiply(program.camMatrix, m4.rotateZ(Math.PI/6*deltaTime));}
-	//
-	for (let partsArr of objsArr) {updateBoxes(partsArr, deltaTime);}
+function updatePos(pr, objsArr, dt) {
+	let prcm = pr.camMatrix;
+	if (cntrl.moveLeft) {prcm = m4.multiply(prcm, m4.translate(-250*dt, 0, 0));}
+	if (cntrl.moveRight) {prcm = m4.multiply(prcm, m4.translate(250*dt, 0, 0));}
+	if (cntrl.moveDown) {prcm = m4.multiply(prcm, m4.translate(0, -250*dt, 0));}
+	if (cntrl.moveUp) {prcm = m4.multiply(prcm, m4.translate(0, 250*dt, 0));}
+	if (cntrl.moveBackward) {prcm = m4.multiply(prcm, m4.translate(0, 0, 250*dt));}
+	if (cntrl.moveForward) {prcm = m4.multiply(prcm, m4.translate(0, 0, -250*dt));}
+	if (cntrl.turnDown) {prcm = m4.multiply(prcm, m4.rotateX(-Math.PI/6*dt));}
+	if (cntrl.turnUp) {prcm = m4.multiply(prcm, m4.rotateX(Math.PI/6*dt));}
+	if (cntrl.turnLeft) {prcm = m4.multiply(prcm, m4.rotateY(-Math.PI/6*dt));}
+	if (cntrl.turnRight) {prcm = m4.multiply(prcm, m4.rotateY(Math.PI/6*dt));}
+	if (cntrl.spinLeft) {prcm = m4.multiply(prcm, m4.rotateZ(-Math.PI/6*dt));}
+	if (cntrl.spinRight) {prcm = m4.multiply(prcm, m4.rotateZ(Math.PI/6*dt));}
+	for (let partsArr of objsArr) {updateBoxes(partsArr, dt);}
 }
 // 1
-function updateBoxes(partsArr, deltaTime) {	
-	//
+function updateBoxes(partsArr, dt) {
 	if (partsArr.categ === 'anchor') {
-		//
-		partsArr.mat = m4.multiply(partsArr.mat, m4.translate(partsArr.data.pos.spd.x*deltaTime*10, partsArr.data.pos.spd.y*deltaTime*10, partsArr.data.pos.spd.z*deltaTime*10));
-		partsArr.data.pos.x = partsArr.mat[12];
-		partsArr.data.pos.y = partsArr.mat[13];
-		partsArr.data.pos.z = partsArr.mat[14];
-		//
-		if (partsArr.data.pos.z > objsArray[objsArray.length-1].data.size.z/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.z > tempMatrix[14]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.z > tempMatrix[14]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.z > tempMatrix[14]) {partsArr.data.pos.spd.z *= -1;}
-		}
-		if (partsArr.data.pos.z < -objsArray[objsArray.length-1].data.size.z/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.z < tempMatrix[14]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.z < tempMatrix[14]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.z < tempMatrix[14]) {partsArr.data.pos.spd.z *= -1;}
-		}
-		if (partsArr.data.pos.x > objsArray[objsArray.length-1].data.size.x/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.x > tempMatrix[12]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.x > tempMatrix[12]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.x > tempMatrix[12]) {partsArr.data.pos.spd.z *= -1;}
-		}
-		if (partsArr.data.pos.x < -objsArray[objsArray.length-1].data.size.x/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.x < tempMatrix[12]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.x < tempMatrix[12]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.x < tempMatrix[12]) {partsArr.data.pos.spd.z *= -1;}
-		}
-		if (partsArr.data.pos.y > objsArray[objsArray.length-1].data.size.x/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.y > tempMatrix[13]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.y > tempMatrix[13]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.y > tempMatrix[13]) {partsArr.data.pos.spd.z *= -1;}
-		}
-		if (partsArr.data.pos.y < -objsArray[objsArray.length-1].data.size.x/2) {
-			let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-partsArr.data.pos.spd.x*deltaTime*10, 0, 0));
-			if (partsArr.data.pos.y < tempMatrix[13]) {partsArr.data.pos.spd.x *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -partsArr.data.pos.spd.y*deltaTime*10, 0));
-			if (partsArr.data.pos.y < tempMatrix[13]) {partsArr.data.pos.spd.y *= -1;}
-			tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -partsArr.data.pos.spd.z*deltaTime*10));
-			if (partsArr.data.pos.y < tempMatrix[13]) {partsArr.data.pos.spd.z *= -1;}
-		}
+		let padp = partsArr.data.pos;
+		partsArr.mat = m4.multiply(partsArr.mat, m4.translate(padp.spd.x*dt*10, padp.spd.y*dt*10, padp.spd.z*dt*10));
+		padp.x = partsArr.mat[12];
+		padp.y = partsArr.mat[13];
+		padp.z = partsArr.mat[14];
+		if (padp.z > objsArray[objsArray.length-1].data.size.z/2) {resetPartsDir(partsArr, padp, dt);}
+		if (padp.z < -objsArray[objsArray.length-1].data.size.z/2) {resetPartsDir(partsArr, padp, dt);}
+		if (padp.x > objsArray[objsArray.length-1].data.size.x/2) {resetPartsDir(partsArr, padp, dt);}
+		if (padp.x < -objsArray[objsArray.length-1].data.size.x/2) {resetPartsDir(partsArr, padp, dt);}
+		if (padp.y > objsArray[objsArray.length-1].data.size.x/2) {resetPartsDir(partsArr, padp, dt);}
+		if (padp.y < -objsArray[objsArray.length-1].data.size.x/2) {resetPartsDir(partsArr, padp, dt);}
 	}
-	//
 	if (partsArr.categ === 'joint') {
-		for (let {func, ind} of [{func: m4.rotateX, ind: 'x'}, {func: m4.rotateY, ind: 'y'}, {func: m4.rotateZ, ind: 'z'}]) {
-			if (partsArr.data.rot[ind] < partsArr.data.rot.min[ind] || partsArr.data.rot[ind] > partsArr.data.rot.max[ind]) {
-				partsArr.data.rot.spd[ind] *= -1;
-				resetPartsRot(partsArr, func, ind);
+		let loopArr = [{func: m4.rotateX, ind: 'x'}, {func: m4.rotateY, ind: 'y'}, {func: m4.rotateZ, ind: 'z'}];
+		let padr = partsArr.data.rot;
+		for (let {func, ind} of loopArr) {
+			if (padr[ind] < padr.min[ind] || padr[ind] > padr.max[ind]) {
+				padr.spd[ind] *= -1;
+				resetPartsRot(partsArr, padr, func, ind);
 			}
 		}
-		for (let {func, ind} of [{func: m4.rotateX, ind: 'x'}, {func: m4.rotateY, ind: 'y'}, {func: m4.rotateZ, ind: 'z'}]) {updatePartsRot(partsArr, func, ind, deltaTime);}
+		for (let {func, ind} of loopArr) {updatePartsRot(partsArr, padr, func, ind, dt);}
 	}
-	//
-	if (partsArr.sat.length > 0) {for (let box of partsArr.sat) {updateBoxes(box, deltaTime);}}
+	if (partsArr.sat.length > 0) {for (let box of partsArr.sat) {updateBoxes(box, dt);}}
 }
 // 2
-function resetPartsRot(partsArr, rotFunc, ind) {
+function resetPartsDir(partsArr, padp, dt) {
+	let tempMatrix = m4.multiply(partsArr.mat, m4.translate(-padp.spd.x*dt*10, 0, 0));
+	if (padp.z > tempMatrix[14]) {padp.spd.x *= -1;}
+	tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, -padp.spd.y*dt*10, 0));
+	if (padp.z > tempMatrix[14]) {padp.spd.y *= -1;}
+	tempMatrix = m4.multiply(partsArr.mat, m4.translate(0, 0, -padp.spd.z*dt*10));
+	if (padp.z > tempMatrix[14]) {padp.spd.z *= -1;}
+}
+// 2
+function resetPartsRot(partsArr, padr, rotFunc, ind) {
 	let tempRotSpd;
-	if (partsArr.data.rot[ind] < partsArr.data.rot.min[ind]) {tempRotSpd = partsArr.data.rot.min[ind] - partsArr.data.rot[ind];}
-	if (partsArr.data.rot[ind] > partsArr.data.rot.max[ind]) {tempRotSpd = partsArr.data.rot.max[ind] - partsArr.data.rot[ind];}
+	if (padr[ind] < padr.min[ind]) {
+		tempRotSpd = padr.min[ind] - padr[ind];
+	}
+	if (padr[ind] > padr.max[ind]) {
+		tempRotSpd = padr.max[ind] - padr[ind];
+	}
 	partsArr.mat = m4.multiply(partsArr.mat, rotFunc(tempRotSpd));
 	partsArr.rotMat = m4.multiply(partsArr.rotMat, rotFunc(tempRotSpd));
-	partsArr.data.rot[ind] += tempRotSpd;
+	padr[ind] += tempRotSpd;
 }
 // 2
-function updatePartsRot(partsArr, rotFunc, ind, deltaTime) {
-	partsArr.mat = m4.multiply(partsArr.mat, rotFunc(partsArr.data.rot.spd[ind]*deltaTime));
-	partsArr.rotMat = m4.multiply(partsArr.rotMat, rotFunc(partsArr.data.rot.spd[ind]*deltaTime));
-	partsArr.data.rot[ind] += partsArr.data.rot.spd[ind]*deltaTime;
+function updatePartsRot(partsArr, padr, rotFunc, ind, dt) {
+	partsArr.mat = m4.multiply(partsArr.mat, rotFunc(padr.spd[ind]*dt));
+	partsArr.rotMat = m4.multiply(partsArr.rotMat, rotFunc(padr.spd[ind]*dt));
+	padr[ind] += padr.spd[ind]*dt;
 }

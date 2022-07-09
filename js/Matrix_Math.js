@@ -9,11 +9,14 @@ let v3 = {
 			a[0]*b[1] - a[1]*b[0]
 		];
 	},
-	findAngle: function(a, b) {return Math.acos((a.x * b.x + a.y * b.y + a.z * b.z) / (Math.sqrt(a.x**2 + a.y**2 + a.z**2) * Math.sqrt(b.x**2 + b.y**2 + b.z**2)));},
+	findAngle: function(a, b) {
+		return Math.acos((a.x*b.x + a.y*b.y + a.z*b.z) /
+										(Math.sqrt(a.x**2 + a.y**2 + a.z**2) * Math.sqrt(b.x**2 + b.y**2 + b.z**2)));
+	},
 	findSepAngles: function(a, b) {
-		let angX = Math.acos((a.y * b.y + a.z * b.z) / (Math.sqrt(a.y**2 + a.z**2) * Math.sqrt(b.y**2 + b.z**2)));
-		let angY = Math.acos((a.x * b.x + a.z * b.z) / (Math.sqrt(a.x**2 + a.z**2) * Math.sqrt(b.x**2 + b.z**2)));
-		let angZ = Math.acos((a.x * b.x + a.y * b.y) / (Math.sqrt(a.x**2 + a.y**2) * Math.sqrt(b.x**2 + b.y**2)));
+		let angX = Math.acos((a.y*b.y + a.z*b.z) / (Math.sqrt(a.y**2 + a.z**2) * Math.sqrt(b.y**2 + b.z**2)));
+		let angY = Math.acos((a.x*b.x + a.z*b.z) / (Math.sqrt(a.x**2 + a.z**2) * Math.sqrt(b.x**2 + b.z**2)));
+		let angZ = Math.acos((a.x*b.x + a.y*b.y) / (Math.sqrt(a.x**2 + a.y**2) * Math.sqrt(b.x**2 + b.y**2)));
 		return {angX: angX, angY: angY, angZ: angZ};
 	},
 	normalize: function(v) {
@@ -37,23 +40,22 @@ let m3 = {
 	},
 	multiplyVector: function (a, b) {
 		return [
-			b[0] * a[0] + b[1] * a[3] + b[2] * a[6],
-			b[0] * a[1] + b[1] * a[4] + b[2] * a[7],
-			b[0] * a[2] + b[1] * a[5] + b[2] * a[8],
-			
+			b[0]*a[0] + b[1]*a[3] + b[2]*a[6],
+			b[0]*a[1] + b[1]*a[4] + b[2]*a[7],
+			b[0]*a[2] + b[1]*a[5] + b[2]*a[8],
 		];
 	},
 	multiply: function(a, b) {
 		return [
-			b[0] * a[0] + b[1] * a[3] + b[2] * a[6],
-			b[0] * a[1] + b[1] * a[4] + b[2] * a[7],
-			b[0] * a[2] + b[1] * a[5] + b[2] * a[8],
-			b[3] * a[0] + b[4] * a[3] + b[5] * a[6],
-			b[3] * a[1] + b[4] * a[4] + b[5] * a[7],
-			b[3] * a[2] + b[3] * a[5] + b[5] * a[8],
-			b[6] * a[0] + b[7] * a[3] + b[8] * a[6],
-			b[6] * a[1] + b[7] * a[4] + b[8] * a[7],
-			b[6] * a[2] + b[7] * a[5] + b[8] * a[8]
+			b[0]*a[0] + b[1]*a[3] + b[2]*a[6],
+			b[0]*a[1] + b[1]*a[4] + b[2]*a[7],
+			b[0]*a[2] + b[1]*a[5] + b[2]*a[8],
+			b[3]*a[0] + b[4]*a[3] + b[5]*a[6],
+			b[3]*a[1] + b[4]*a[4] + b[5]*a[7],
+			b[3]*a[2] + b[3]*a[5] + b[5]*a[8],
+			b[6]*a[0] + b[7]*a[3] + b[8]*a[6],
+			b[6]*a[1] + b[7]*a[4] + b[8]*a[7],
+			b[6]*a[2] + b[7]*a[5] + b[8]*a[8]
 		];
 	},
 	translate: function(tx, ty) {
@@ -98,30 +100,30 @@ let m4 = {
 	},
 	multiplyVector: function (a, b) {
 		return [
-			b[0] * a[0] + b[1] * a[4] + b[2] * a[8] + b[3] * a[12],
-			b[0] * a[1] + b[1] * a[5] + b[2] * a[9] + b[3] * a[13],
-			b[0] * a[2] + b[1] * a[6] + b[2] * a[10] + b[3] * a[14],
-			b[0] * a[3] + b[1] * a[7] + b[2] * a[11] + b[3] * a[15]
+			b[0]*a[0] + b[1]*a[4] + b[2]*a[8] + b[3]*a[12],
+			b[0]*a[1] + b[1]*a[5] + b[2]*a[9] + b[3]*a[13],
+			b[0]*a[2] + b[1]*a[6] + b[2]*a[10] + b[3]*a[14],
+			b[0]*a[3] + b[1]*a[7] + b[2]*a[11] + b[3]*a[15]
 		];
 	},
 	multiply: function(a, b) {
 		return [
-			b[0] * a[0] + b[1] * a[4] + b[2] * a[8] + b[3] * a[12],
-			b[0] * a[1] + b[1] * a[5] + b[2] * a[9] + b[3] * a[13],
-			b[0] * a[2] + b[1] * a[6] + b[2] * a[10] + b[3] * a[14],
-			b[0] * a[3] + b[1] * a[7] + b[2] * a[11] + b[3] * a[15],
-			b[4] * a[0] + b[5] * a[4] + b[6] * a[8] + b[7] * a[12],
-			b[4] * a[1] + b[5] * a[5] + b[6] * a[9] + b[7] * a[13],
-			b[4] * a[2] + b[5] * a[6] + b[6] * a[10] + b[7] * a[14],
-			b[4] * a[3] + b[5] * a[7] + b[6] * a[11] + b[7] * a[15],
-			b[8] * a[0] + b[9] * a[4] + b[10] * a[8] + b[11] * a[12],
-			b[8] * a[1] + b[9] * a[5] + b[10] * a[9] + b[11] * a[13],
-			b[8] * a[2] + b[9] * a[6] + b[10] * a[10] + b[11] * a[14],
-			b[8] * a[3] + b[9] * a[7] + b[10] * a[11] + b[11] * a[15],
-			b[12] * a[0] + b[13] * a[4] + b[14] * a[8] + b[15] * a[12],
-			b[12] * a[1] + b[13] * a[5] + b[14] * a[9] + b[15] * a[13],
-			b[12] * a[2] + b[13] * a[6] + b[14] * a[10] + b[15] * a[14],
-			b[12] * a[3] + b[13] * a[7] + b[14] * a[11] + b[15] * a[15]
+			b[0]*a[0] + b[1]*a[4] + b[2]*a[8] + b[3]*a[12],
+			b[0]*a[1] + b[1]*a[5] + b[2]*a[9] + b[3]*a[13],
+			b[0]*a[2] + b[1]*a[6] + b[2]*a[10] + b[3]*a[14],
+			b[0]*a[3] + b[1]*a[7] + b[2]*a[11] + b[3]*a[15],
+			b[4]*a[0] + b[5]*a[4] + b[6]*a[8] + b[7]*a[12],
+			b[4]*a[1] + b[5]*a[5] + b[6]*a[9] + b[7]*a[13],
+			b[4]*a[2] + b[5]*a[6] + b[6]*a[10] + b[7]*a[14],
+			b[4]*a[3] + b[5]*a[7] + b[6]*a[11] + b[7]*a[15],
+			b[8]*a[0] + b[9]*a[4] + b[10]*a[8] + b[11]*a[12],
+			b[8]*a[1] + b[9]*a[5] + b[10]*a[9] + b[11]*a[13],
+			b[8]*a[2] + b[9]*a[6] + b[10]*a[10] + b[11]*a[14],
+			b[8]*a[3] + b[9]*a[7] + b[10]*a[11] + b[11]*a[15],
+			b[12]*a[0] + b[13]*a[4] + b[14]*a[8] + b[15]*a[12],
+			b[12]*a[1] + b[13]*a[5] + b[14]*a[9] + b[15]*a[13],
+			b[12]*a[2] + b[13]*a[6] + b[14]*a[10] + b[15]*a[14],
+			b[12]*a[3] + b[13]*a[7] + b[14]*a[11] + b[15]*a[15]
 		];
 	},
 	translate: function(tx, ty, tz) {
@@ -170,7 +172,7 @@ let m4 = {
 			0, 0, 0, 1
 		];
 	},
-	invert: function(matrix) {	
+	invert: function(matrix) {
 		let result = [];
 		let n11 = matrix[0], n12 = matrix[4], n13 = matrix[8], n14 = matrix[12];
 		let n21 = matrix[1], n22 = matrix[5], n23 = matrix[9], n24 = matrix[13];
@@ -208,7 +210,7 @@ let m4 = {
 			matrix[3], matrix[7], matrix[11], matrix[15]
 		];
 	},
-	
+
 	clipToMat3: function(matrix) {
 		return [
 			matrix[0], matrix[1], matrix[2],
@@ -216,7 +218,7 @@ let m4 = {
 			matrix[8], matrix[9], matrix[10]
 		];
 	},
-	
+
 	orthographic: function(left, right, bottom, top, near, far) {
 		return [
 			2/(right-left), 0, 0, 0,
@@ -226,7 +228,7 @@ let m4 = {
 		];
 	},
 	perspective: function(fov, aspect) {
-		let f = 1.0 / Math.tan(fov / 2);		
+		let f = 1.0 / Math.tan(fov / 2);
 		return [
 			f/aspect, 0, 0, 0,
 			0, f, 0, 0,

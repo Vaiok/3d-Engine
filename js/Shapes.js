@@ -9,20 +9,28 @@ let sh2d = {
 };
 let sh3d = {
 	setBoxPoints: function(data, mat) {
-		let x1 = -data.size.x/2, x2 = data.size.x/2, y1 = -data.size.y/2, y2 = data.size.y/2, z1 = -data.size.z/2, z2 = data.size.z/2;
+		let x1 = -data.size.x/2, x2 = data.size.x/2;
+		let y1 = -data.size.y/2, y2 = data.size.y/2;
+		let z1 = -data.size.z/2, z2 = data.size.z/2;
 		let p = [{x: x1, y: y1, z: z1}, {x: x1, y: y2, z: z1}, {x: x2, y: y1, z: z1}, {x: x2, y: y2, z: z1},
-				{x: x1, y: y1, z: z2}, {x: x1, y: y2, z: z2}, {x: x2, y: y1, z: z2}, {x: x2, y: y2, z: z2}];
+						{x: x1, y: y1, z: z2}, {x: x1, y: y2, z: z2}, {x: x2, y: y1, z: z2}, {x: x2, y: y2, z: z2}];
 		for (let pnt of p) {
 			let tempPnt = m4.multiplyVector(mat, [pnt.x, pnt.y, pnt.z, 1]);
 			pnt.x = tempPnt[0], pnt.y = tempPnt[1], pnt.z = tempPnt[2];
 		}
 		return [
-			p[0].x, p[0].y, p[0].z, p[1].x, p[1].y, p[1].z, p[2].x, p[2].y, p[2].z, p[2].x, p[2].y, p[2].z, p[1].x, p[1].y, p[1].z, p[3].x, p[3].y, p[3].z, // Front
-			p[4].x, p[4].y, p[4].z, p[6].x, p[6].y, p[6].z, p[5].x, p[5].y, p[5].z, p[5].x, p[5].y, p[5].z, p[6].x, p[6].y, p[6].z, p[7].x, p[7].y, p[7].z, // Back
-			p[0].x, p[0].y, p[0].z, p[2].x, p[2].y, p[2].z, p[4].x, p[4].y, p[4].z, p[4].x, p[4].y, p[4].z, p[2].x, p[2].y, p[2].z, p[6].x, p[6].y, p[6].z, // Bottom
-			p[1].x, p[1].y, p[1].z, p[5].x, p[5].y, p[5].z, p[3].x, p[3].y, p[3].z, p[3].x, p[3].y, p[3].z, p[5].x, p[5].y, p[5].z, p[7].x, p[7].y, p[7].z, // Top
-			p[0].x, p[0].y, p[0].z, p[4].x, p[4].y, p[4].z, p[1].x, p[1].y, p[1].z, p[1].x, p[1].y, p[1].z, p[4].x, p[4].y, p[4].z, p[5].x, p[5].y, p[5].z, // Left
-			p[2].x, p[2].y, p[2].z, p[3].x, p[3].y, p[3].z, p[6].x, p[6].y, p[6].z, p[6].x, p[6].y, p[6].z, p[3].x, p[3].y, p[3].z, p[7].x, p[7].y, p[7].z  // Right
+			p[0].x, p[0].y, p[0].z, p[1].x, p[1].y, p[1].z, p[2].x, p[2].y, p[2].z,
+			p[2].x, p[2].y, p[2].z, p[1].x, p[1].y, p[1].z, p[3].x, p[3].y, p[3].z, // Front
+			p[4].x, p[4].y, p[4].z, p[6].x, p[6].y, p[6].z, p[5].x, p[5].y, p[5].z,
+			p[5].x, p[5].y, p[5].z, p[6].x, p[6].y, p[6].z, p[7].x, p[7].y, p[7].z, // Back
+			p[0].x, p[0].y, p[0].z, p[2].x, p[2].y, p[2].z, p[4].x, p[4].y, p[4].z,
+			p[4].x, p[4].y, p[4].z, p[2].x, p[2].y, p[2].z, p[6].x, p[6].y, p[6].z, // Bottom
+			p[1].x, p[1].y, p[1].z, p[5].x, p[5].y, p[5].z, p[3].x, p[3].y, p[3].z,
+			p[3].x, p[3].y, p[3].z, p[5].x, p[5].y, p[5].z, p[7].x, p[7].y, p[7].z, // Top
+			p[0].x, p[0].y, p[0].z, p[4].x, p[4].y, p[4].z, p[1].x, p[1].y, p[1].z,
+			p[1].x, p[1].y, p[1].z, p[4].x, p[4].y, p[4].z, p[5].x, p[5].y, p[5].z, // Left
+			p[2].x, p[2].y, p[2].z, p[3].x, p[3].y, p[3].z, p[6].x, p[6].y, p[6].z,
+			p[6].x, p[6].y, p[6].z, p[3].x, p[3].y, p[3].z, p[7].x, p[7].y, p[7].z  // Right
 		];
 	},
 	setBoxNormals: function(mat) {

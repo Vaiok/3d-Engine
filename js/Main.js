@@ -10,13 +10,10 @@ window.addEventListener('keyup', keyUp);
 requestAnimationFrame(runProgram);
 // 0
 function runProgram(currTime) {
-	//
 	requestAnimationFrame(runProgram);
-	//
 	currTime *= 0.001;
 	let deltaTime = currTime - cntrl.prevTime;
 	cntrl.prevTime = currTime;
-	//
 	updatePos(prog1, objsArray, deltaTime);
 	runShaderProgram(canvas, webGL, prog1, objsArray);
 }
