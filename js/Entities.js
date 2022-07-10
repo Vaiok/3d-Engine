@@ -115,12 +115,12 @@ function makeBlockData(ctg, s, p, r, c) {return {categ: ctg, sat: [], data: {siz
 // 1
 function createObjectMatrices(partsArr) {
 	partsArr.mat = m4.translate(partsArr.data.pos.x, partsArr.data.pos.y, partsArr.data.pos.z);
-	partsArr.mat = m4.multiply(partsArr.mat, m4.rotateX(partsArr.data.rot.x));
-	partsArr.mat = m4.multiply(partsArr.mat, m4.rotateY(partsArr.data.rot.y));
-	partsArr.mat = m4.multiply(partsArr.mat, m4.rotateZ(partsArr.data.rot.z));
+	partsArr.mat = m4.mult(partsArr.mat, m4.rotateX(partsArr.data.rot.x));
+	partsArr.mat = m4.mult(partsArr.mat, m4.rotateY(partsArr.data.rot.y));
+	partsArr.mat = m4.mult(partsArr.mat, m4.rotateZ(partsArr.data.rot.z));
 	partsArr.rotMat = m4.identity();
-	partsArr.rotMat = m4.multiply(partsArr.rotMat, m4.rotateX(partsArr.data.rot.x));
-	partsArr.rotMat = m4.multiply(partsArr.rotMat, m4.rotateY(partsArr.data.rot.y));
-	partsArr.rotMat = m4.multiply(partsArr.rotMat, m4.rotateZ(partsArr.data.rot.z));
+	partsArr.rotMat = m4.mult(partsArr.rotMat, m4.rotateX(partsArr.data.rot.x));
+	partsArr.rotMat = m4.mult(partsArr.rotMat, m4.rotateY(partsArr.data.rot.y));
+	partsArr.rotMat = m4.mult(partsArr.rotMat, m4.rotateZ(partsArr.data.rot.z));
 	if (partsArr.sat.length > 0) {for (let box of partsArr.sat) {createObjectMatrices(box);}}
 }

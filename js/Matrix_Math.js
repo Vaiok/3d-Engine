@@ -38,14 +38,14 @@ let m3 = {
 			0, 0, 1
 		];
 	},
-	multiplyVector: function (a, b) {
+	multVec: function (a, b) {
 		return [
 			b[0]*a[0] + b[1]*a[3] + b[2]*a[6],
 			b[0]*a[1] + b[1]*a[4] + b[2]*a[7],
 			b[0]*a[2] + b[1]*a[5] + b[2]*a[8],
 		];
 	},
-	multiply: function(a, b) {
+	mult: function(a, b) {
 		return [
 			b[0]*a[0] + b[1]*a[3] + b[2]*a[6],
 			b[0]*a[1] + b[1]*a[4] + b[2]*a[7],
@@ -98,7 +98,7 @@ let m4 = {
 			0, 0, 0, 1
 		];
 	},
-	multiplyVector: function (a, b) {
+	multVec: function (a, b) {
 		return [
 			b[0]*a[0] + b[1]*a[4] + b[2]*a[8] + b[3]*a[12],
 			b[0]*a[1] + b[1]*a[5] + b[2]*a[9] + b[3]*a[13],
@@ -106,7 +106,7 @@ let m4 = {
 			b[0]*a[3] + b[1]*a[7] + b[2]*a[11] + b[3]*a[15]
 		];
 	},
-	multiply: function(a, b) {
+	mult: function(a, b) {
 		return [
 			b[0]*a[0] + b[1]*a[4] + b[2]*a[8] + b[3]*a[12],
 			b[0]*a[1] + b[1]*a[5] + b[2]*a[9] + b[3]*a[13],
@@ -139,8 +139,8 @@ let m4 = {
 		let s = Math.sin(radians);
 		return [
 			1, 0, 0, 0,
-			0, c, s, 0,
-			0, -s, c, 0,
+			0, c, -s, 0,
+			0, s, c, 0,
 			0, 0, 0, 1
 		];
 	},
@@ -246,5 +246,77 @@ let m4 = {
 			z[0], z[1], z[2], 0,
 			cam[0], cam[1], cam[2], 1
 		];
+	}
+};
+let q4 = {
+	identity: function() {
+		return [1, 0, 0, 0];
+	},
+	invert: function(quat) {
+		return [quat[0], -quat[1], -quat[2], -quat[3]];
+	},
+	mult: function(a, b) {
+		return [
+			a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3],
+			a[0]*b[1] + a[1]*b[0] - a[2]*b[3] + a[3]*b[2],
+			a[0]*b[2] + a[1]*b[3] + a[2]*b[0] - a[3]*b[1],
+			a[0]*b[3] - a[1]*b[2] + a[2]*b[1] + a[3]*b[0]
+		];
+	},
+	rotatePoint: function(quat, point) {
+		let p = [0, point[0], point[1], point[2]];
+		p = q4.mult(q4.mult(q4.invert(quat), p), quat);
+		return [p[1], p[2], p[3]];
+	},
+	rotateCoord: function(quat, point) {
+		let p = [0, point[0], point[1], point[2]];
+		p = q4.mult(q4.mult(quat, p), q4.invert(quat));
+		return [p[1], p[2], p[3]];
+	},
+	eulerToQuat: function(x, y, z) {
+		let c = Math.cos, s = Math.sin;
+		return [
+			c(x/2)*c(y/2)*c(z/2) + s(x/2)*s(y/2)*s(z/2),
+			s(x/2)*c(y/2)*c(z/2) - c(x/2)*s(y/2)*s(z/2),
+			c(x/2)*s(y/2)*c(z/2) + s(x/2)*c(y/2)*s(z/2),
+			c(x/2)*c(y/2)*s(z/2) - s(x/2)*s(y/2)*c(z/2)
+		];
+	},
+	quatToEulerX: function(quat) {
+		return Math.atan2(2*(quat[0]*quat[1] + quat[2]*quat[3]), quat[0]**2 - quat[1]**2 - quat[2]**2 + quat[3]**2);
+	},
+	quatToEulerY: function(quat) {
+		return Math.asin(2*(quat[0]*quat[2] - quat[1]*quat[3]));
+	},
+	quatToEulerZ: function(quat) {
+		return Math.atan2(2*(quat[0]*quat[3] + quat[1]*quat[2]), quat[0]**2 + quat[1]**2 - quat[2]**2 - quat[3]**2);
+	},
+	quatToRotMat: function(quat) {
+		return [
+			quat[0]**2 + quat[1]**2 - quat[2]**2 - quat[3]**2, 2*(quat[1]*quat[2]) - 2*(quat[0]*quat[3]),
+			2*(quat[1]*quat[3]) + 2*(quat[0]*quat[2]), 0,
+			2*(quat[1]*quat[2]) + 2*(quat[0]*quat[3]), quat[0]**2 - quat[1]**2 + quat[2]**2 - quat[3]**2,
+			2*(quat[2]*quat[3]) - 2*(quat[0]*quat[1]), 0,
+			2*(quat[1]*quat[3]) - 2*(quat[0]*quat[2]), 2*(quat[2]*quat[3]) + 2*(quat[0]*quat[1]),
+			quat[0]**2 - quat[1]**2 - quat[2]**2 + quat[3]**2, 0,
+			0, 0, 0, 1
+		];
+	},
+	rotMatToQuat: function(mat) {
+		let q0 = Math.sqrt((1 + mat[0] + mat[5] + mat[10]) / 4), q1 = Math.sqrt((1 + mat[0] - mat[5] - mat[10]) / 4);
+		let q2 = Math.sqrt((1 - mat[0] + mat[5] - mat[10]) / 4), q3 = Math.sqrt((1 - mat[0] - mat[5] + mat[10]) / 4);
+		let largest = q0 >= q1 ? (q0 >= q2 ? (q0 >= q3 ? q0 : q3) : (q2 >= q3 ? q2 : q3)) :
+														(q1 >= q2 ? (q1 >= q3 ? q1 : q3) : (q2 >= q3 ? q2 : q3));
+		switch (largest) {
+			case q0:
+				q1 = (mat[9] - mat[6]) / (4*q0), q2 = (mat[2] - mat[8]) / (4*q0), q3 = (mat[4] - mat[1]) / (4*q0); break;
+			case q1:
+				q0 = (mat[9] - mat[6]) / (4*q1), q2 = (mat[1] + mat[4]) / (4*q1), q3 = (mat[2] + mat[8]) / (4*q1); break;
+			case q2:
+				q0 = (mat[2] - mat[8]) / (4*q2), q1 = (mat[1] + mat[4]) / (4*q2), q3 = (mat[6] + mat[9]) / (4*q2); break;
+			case q3:
+				q0 = (mat[4] - mat[1]) / (4*q3), q1 = (mat[2] + mat[8]) / (4*q3), q2 = (mat[6] + mat[9]) / (4*q3); break;
+		}
+		return [q0, q1, q2, q3];
 	}
 };

@@ -30,10 +30,10 @@ function runShaderProgram(cnvs, gl, pr, objsArr) {
 	gl.useProgram(pr.program);
 	prun.mtrx4.uWorld.val = m4.invert(pr.camMatrix);
 	let projMatrix = m4.perspective(pr.fieldOfView, cnvs.width/cnvs.height);
-	prun.mtrx4.uViewProj.val = m4.multiply(projMatrix, prun.mtrx4.uWorld.val);
+	prun.mtrx4.uViewProj.val = m4.mult(projMatrix, prun.mtrx4.uWorld.val);
 	prun.mtrx4.uWorldInvTrans.val = m4.transpose(pr.camMatrix);
-	prun.vctr3.uLightWorldPos.val = v4.clipToVec3(m4.multiplyVector(prun.mtrx4.uWorld.val, pr.lightPos.concat(1)));
-	prun.vctr3.uLightDir.val = m3.multiplyVector(m4.clipToMat3(prun.mtrx4.uWorld.val), pr.lightDir);
+	prun.vctr3.uLightWorldPos.val = v4.clipToVec3(m4.multVec(prun.mtrx4.uWorld.val, pr.lightPos.concat(1)));
+	prun.vctr3.uLightDir.val = m3.multVec(m4.clipToMat3(prun.mtrx4.uWorld.val), pr.lightDir);
 	for (let unif in prun.mtrx4) {gl.uniformMatrix4fv(prun.mtrx4[unif].bind, false, prun.mtrx4[unif].val);}
 	for (let unif in prun.vctr3) {gl.uniform3fv(prun.vctr3[unif].bind, prun.vctr3[unif].val);}
 	for (let unif in prun.flt1) {gl.uniform1f(prun.flt1[unif].bind, prun.flt1[unif].val);}
@@ -56,7 +56,7 @@ function buildBuffers(pr, partsArr, objMat, normMat) {
 	prat.aColor.data = prat.aColor.data.concat(sh3d.setBoxColors(partsArr.data.clr));
 	if (partsArr.sat.length > 0) {
 		for (let box of partsArr.sat) {
-			buildBuffers(pr, box, m4.multiply(objMat, box.mat), m4.multiply(normMat, box.rotMat));
+			buildBuffers(pr, box, m4.mult(objMat, box.mat), m4.mult(normMat, box.rotMat));
 		}
 	}
 	pr.vertCount += 36;

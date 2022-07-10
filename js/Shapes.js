@@ -15,7 +15,7 @@ let sh3d = {
 		let p = [{x: x1, y: y1, z: z1}, {x: x1, y: y2, z: z1}, {x: x2, y: y1, z: z1}, {x: x2, y: y2, z: z1},
 						{x: x1, y: y1, z: z2}, {x: x1, y: y2, z: z2}, {x: x2, y: y1, z: z2}, {x: x2, y: y2, z: z2}];
 		for (let pnt of p) {
-			let tempPnt = m4.multiplyVector(mat, [pnt.x, pnt.y, pnt.z, 1]);
+			let tempPnt = m4.multVec(mat, [pnt.x, pnt.y, pnt.z, 1]);
 			pnt.x = tempPnt[0], pnt.y = tempPnt[1], pnt.z = tempPnt[2];
 		}
 		return [
@@ -38,7 +38,7 @@ let sh3d = {
 				{x: 0, y: 1, z: 0}, {x: -1, y: 0, z: 0}, {x: 1, y: 0, z: 0}];
 		let normals = [];
 		for (let side of s) {
-			let tempSide = m4.multiplyVector(mat, [side.x, side.y, side.z, 1]);
+			let tempSide = m4.multVec(mat, [side.x, side.y, side.z, 1]);
 			side.x = tempSide[0], side.y = tempSide[1], side.z = tempSide[2];
 			for (let i = 0; i < 6; i++) {normals = normals.concat([side.x, side.y, side.z]);}
 		}
