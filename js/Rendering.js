@@ -22,7 +22,11 @@ function setupShaderProgram(cnvs, gl, pr) {
 	gl.enable(gl.DEPTH_TEST);
 	gl.clearColor(1, 1, 1, 1);
 }
+
 // Buffers, Transformations, and Rendering
+
+
+// Change for Quaternions
 // 0
 function runShaderProgram(cnvs, gl, pr, objsArr) {
 	let prun = pr.uniforms, prat = pr.attributes;
@@ -61,6 +65,9 @@ function buildBuffers(pr, partsArr, objMat, normMat) {
 	}
 	pr.vertCount += 36;
 }
+// // Change for Quaternions
+
+
 // 1
 function makeBuffer(gl, data) {
 	let buffer = gl.createBuffer();

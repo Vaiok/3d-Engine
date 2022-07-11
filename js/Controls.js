@@ -35,6 +35,9 @@ function keyUp(e) {
 	if (e.key === 'z') {cntrl.spinLeft = false;}
 	if (e.key === 'c') {cntrl.spinRight = false;}
 }
+
+
+// Change for Quaternions
 // Control Loop Function
 // 0
 function updatePos(pr, objsArr, dt) {
@@ -109,3 +112,4 @@ function updatePartsRot(partsArr, padr, rotFunc, ind, dt) {
 	partsArr.rotMat = m4.mult(partsArr.rotMat, rotFunc(padr.spd[ind]*dt));
 	padr[ind] += padr.spd[ind]*dt;
 }
+// // Change for Quaternions

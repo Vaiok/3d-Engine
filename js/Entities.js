@@ -112,6 +112,9 @@ function buildGround(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 }
 // 1
 function makeBlockData(ctg, s, p, r, c) {return {categ: ctg, sat: [], data: {size: s, pos: p, rot: r, clr: c}};}
+
+
+// Change for Quaternions
 // 1
 function createObjectMatrices(partsArr) {
 	partsArr.mat = m4.translate(partsArr.data.pos.x, partsArr.data.pos.y, partsArr.data.pos.z);
@@ -124,3 +127,4 @@ function createObjectMatrices(partsArr) {
 	partsArr.rotMat = m4.mult(partsArr.rotMat, m4.rotateZ(partsArr.data.rot.z));
 	if (partsArr.sat.length > 0) {for (let box of partsArr.sat) {createObjectMatrices(box);}}
 }
+// // Change for Quaternions
