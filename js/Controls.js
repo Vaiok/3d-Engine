@@ -42,18 +42,18 @@ function keyUp(e) {
 // 0
 function updatePos(pr, objsArr, dt) {
 	let prcm = pr.camMatrix;
-	if (cntrl.moveLeft) {prcm = m4.mult(prcm, m4.translate(-250*dt, 0, 0));}
-	if (cntrl.moveRight) {prcm = m4.mult(prcm, m4.translate(250*dt, 0, 0));}
-	if (cntrl.moveDown) {prcm = m4.mult(prcm, m4.translate(0, -250*dt, 0));}
-	if (cntrl.moveUp) {prcm = m4.mult(prcm, m4.translate(0, 250*dt, 0));}
-	if (cntrl.moveBackward) {prcm = m4.mult(prcm, m4.translate(0, 0, 250*dt));}
-	if (cntrl.moveForward) {prcm = m4.mult(prcm, m4.translate(0, 0, -250*dt));}
-	if (cntrl.turnDown) {prcm = m4.mult(prcm, m4.rotateX(-Math.PI/6*dt));}
-	if (cntrl.turnUp) {prcm = m4.mult(prcm, m4.rotateX(Math.PI/6*dt));}
-	if (cntrl.turnLeft) {prcm = m4.mult(prcm, m4.rotateY(-Math.PI/6*dt));}
-	if (cntrl.turnRight) {prcm = m4.mult(prcm, m4.rotateY(Math.PI/6*dt));}
-	if (cntrl.spinLeft) {prcm = m4.mult(prcm, m4.rotateZ(-Math.PI/6*dt));}
-	if (cntrl.spinRight) {prcm = m4.mult(prcm, m4.rotateZ(Math.PI/6*dt));}
+	if (cntrl.moveLeft) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(-250*dt, 0, 0));}
+	if (cntrl.moveRight) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(250*dt, 0, 0));}
+	if (cntrl.moveDown) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, -250*dt, 0));}
+	if (cntrl.moveUp) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 250*dt, 0));}
+	if (cntrl.moveBackward) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 0, 250*dt));}
+	if (cntrl.moveForward) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 0, -250*dt));}
+	if (cntrl.turnDown) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateX(Math.PI/6*dt));}
+	if (cntrl.turnUp) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateX(-Math.PI/6*dt));}
+	if (cntrl.turnLeft) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateY(-Math.PI/6*dt));}
+	if (cntrl.turnRight) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateY(Math.PI/6*dt));}
+	if (cntrl.spinLeft) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateZ(-Math.PI/6*dt));}
+	if (cntrl.spinRight) {pr.camMatrix = m4.mult(pr.camMatrix, m4.rotateZ(Math.PI/6*dt));}
 	for (let partsArr of objsArr) {updateBoxes(partsArr, dt);}
 }
 // 1
