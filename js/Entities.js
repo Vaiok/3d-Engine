@@ -17,7 +17,7 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 	partsArr.sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*3, z: BU*3}, {x: 0, y: BU*1, z: -BU/3}, {x: 0, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Head
 	partsArr.sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU/2, y: BU/2, z: BU/2}, {x: -BU*3/4, y: BU/2, z: -BU*11/8}, {x: 0, y: 0, z: 0}, {r: 0, g: 1, b: 1});// Left Eye
 	partsArr.sat[0].sat[0].sat[0].sat[0].sat[1] = makeBlockData('block', {x: BU/2, y: BU/2, z: BU/2}, {x: BU*3/4, y: BU/2, z: -BU*11/8}, {x: 0, y: 0, z: 0}, {r: 0, g: 1, b: 1});// Right Eye
-	partsArr.sat[0].sat[0].sat[0].sat[0].sat[2] = makeBlockData('block', {x: BU/2, y: BU, z: BU/2}, {x: 0, y: 0, z: -BU*6/4}, {x: Math.PI/9, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Nose
+	partsArr.sat[0].sat[0].sat[0].sat[0].sat[2] = makeBlockData('block', {x: BU/2, y: BU, z: BU/2}, {x: 0, y: 0, z: -BU*6/4}, {x: -Math.PI/9, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Nose
 	partsArr.sat[0].sat[0].sat[0].sat[0].sat[3] = makeBlockData('block', {x: BU*3/2, y: BU/4, z: BU/2}, {x: 0, y: -BU*7/8, z: -BU*11/8}, {x: 0, y: 0, z: 0}, {r: 1, g: 0, b: 0});// Mouth
 	partsArr.sat[0].sat[0].sat[0].sat[0].sat[4] = makeBlockData('block', {x: BU*7/2, y: BU, z: BU*3/4}, {x: 0, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Ears
 	partsArr.sat[0].sat[0].sat[0].sat[0].sat[5] = makeBlockData('block', {x: BU*4, y: BU, z: BU*4}, {x: 0, y: BU*3/2, z: 0}, {x: 0, y: 0, z: 0}, {r: 0.3, g: 0.1, b: 0.1});// Hair Top
