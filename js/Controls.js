@@ -41,7 +41,6 @@ function keyUp(e) {
 // Control Loop Function
 // 0
 function updatePos(pr, objsArr, dt) {
-	let prcm = pr.camMatrix;
 	if (cntrl.moveLeft) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(-250*dt, 0, 0));}
 	if (cntrl.moveRight) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(250*dt, 0, 0));}
 	if (cntrl.moveDown) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, -250*dt, 0));}
