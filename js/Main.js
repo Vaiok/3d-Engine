@@ -14,6 +14,7 @@ function runProgram(currTime) {
 	currTime *= 0.001;
 	let deltaTime = currTime - cntrl.prevTime;
 	cntrl.prevTime = currTime;
-	updatePos(prog1, objsArray, deltaTime);
+	updatePos(prog1, deltaTime);
+	for (let partsArr of objsArray) {updateBoxes(partsArr, deltaTime);}
 	runShaderProgram(canvas, webGL, prog1, objsArray);
 }
