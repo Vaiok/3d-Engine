@@ -8,9 +8,6 @@ let sh2d = {
 	}
 };
 let sh3d = {
-
-
-	// Change for Quaternions
 	setBoxPoints: function(data, mat) {
 		let x1 = -data.size.x/2, x2 = data.size.x/2;
 		let y1 = -data.size.y/2, y2 = data.size.y/2;
@@ -47,9 +44,6 @@ let sh3d = {
 		}
 		return normals;
 	},
-	// // Change for Quaternions
-
-
 	setBoxColors: function(clr) {
 		let boxColor = [];
 		for (let i = 0; i < 36; i++) {boxColor = boxColor.concat([clr.r, clr.g, clr.b]);}

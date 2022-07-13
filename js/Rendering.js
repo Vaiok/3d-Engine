@@ -22,11 +22,7 @@ function setupShaderProgram(cnvs, gl, pr) {
 	gl.enable(gl.DEPTH_TEST);
 	gl.clearColor(1, 1, 1, 1);
 }
-
 // Buffers, Transformations, and Rendering
-
-
-// Change for Quaternions
 // 0
 function runShaderProgram(cnvs, gl, pr, objsArr) {
 	let prun = pr.uniforms, prat = pr.attributes;
@@ -43,7 +39,7 @@ function runShaderProgram(cnvs, gl, pr, objsArr) {
 	for (let unif in prun.flt1) {gl.uniform1f(prun.flt1[unif].bind, prun.flt1[unif].val);}
 	for (let partsArr of objsArr) {
 		pr.vertCount = 0;
-		buildBuffers(pr, partsArr, partsArr.mat, partsArr.rotMat);
+		buildBuffers(pr, partsArr, partsArr.mat, q4.quatToRotMat(partsArr.quat));
 		for (let attr in prat) {
 			prat[attr].buff = makeBuffer(gl, new Float32Array(prat[attr].data));
 			setVertexAttribPointer(gl, prat[attr].bind, prat[attr].buff, 3, gl.FLOAT, false, 0, 0);
@@ -60,14 +56,11 @@ function buildBuffers(pr, partsArr, objMat, normMat) {
 	prat.aColor.data = prat.aColor.data.concat(sh3d.setBoxColors(partsArr.data.clr));
 	if (partsArr.sat.length > 0) {
 		for (let box of partsArr.sat) {
-			buildBuffers(pr, box, m4.mult(objMat, box.mat), m4.mult(normMat, box.rotMat));
+			buildBuffers(pr, box, m4.mult(objMat, box.mat), m4.mult(normMat, q4.quatToRotMat(box.quat)));
 		}
 	}
 	pr.vertCount += 36;
 }
-// // Change for Quaternions
-
-
 // 1
 function makeBuffer(gl, data) {
 	let buffer = gl.createBuffer();

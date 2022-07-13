@@ -45,7 +45,7 @@ const prog1 = {
 			gl_FragColor.rgb += specular * uLightColor;
 		}
 	`,
-	camMatrix: m4.lookAt([-100, 50, 50], [-100, 50, -100]), fieldOfView: Math.PI/180 * 72,
+	camMatrix: m4.lookAt([0, 50, 500], [0, 0, 0]), fieldOfView: Math.PI/180 * 72,
 	lightPos: [0, 100, 0], lightDir: [0, -1, 0],
 	vertCount: 0,
 	unifStrings: [{categ: 'mtrx4', strngs: [{strng: 'uWorld', val: m4.identity()},

@@ -1,8 +1,11 @@
 // Setup Shaders
 setupShaderProgram(canvas, webGL, prog1);
 // Build Entities
-for (let i = 0; i < entityCount; i++) {objsArray[i] = buildEntity(-100, BU*7, -BU*30, 0, 0, 0, 0, Math.PI, 0);}
+for (let i = 0; i < entityCount; i++) {objsArray[i] = buildEntity(0, BU*7, -BU*5, 0, 0, 0, 0, Math.PI, 0);}
 objsArray = objsArray.concat(buildGround(0, -BU*20, 0, 0, 0, 0, 0, 0, 0));
+// New
+cntrl.unitSelected = objsArray[0].sat[1].sat[0].sat[0];
+// // New
 // Event Listeners
 window.addEventListener('keydown', keyDown);
 window.addEventListener('keyup', keyUp);
