@@ -2,81 +2,62 @@
 const cntrl = {
 	moveLeft: false, moveRight: false, moveDown: false, moveUp: false, moveBackward: false, moveForward: false,
 	turnDown: false, turnUp: false, turnLeft: false, turnRight: false, spinLeft: false, spinRight: false,
-	// New
-	moveLeftSel: false, moveRightSel: false, moveDownSel: false, moveUpSel: false, moveBackwardSel: false, moveForwardSel: false,
-	turnDownSel: false, turnUpSel: false, turnLeftSel: false, turnRightSel: false, spinLeftSel: false, spinRightSel: false,
-	unitSelected: {},
-	// // New
-	prevTime: 0
+	moveLeftSel: false, moveRightSel: false, moveDownSel: false, moveUpSel: false,
+	moveBackwardSel: false, moveForwardSel: false, turnDownSel: false, turnUpSel: false,
+	turnLeftSel: false, turnRightSel: false, spinLeftSel: false, spinRightSel: false,
+	unitSelected: {}, prevTime: 0
 };
 // Event Functions
 // 0
-function keyDown(e) {
-	if (e.key === 'a') {cntrl.moveLeft = true;}
-	if (e.key === 'd') {cntrl.moveRight = true;}
-	if (e.key === 'x') {cntrl.moveDown = true;}
-	if (e.key === '2') {cntrl.moveUp = true;}
-	if (e.key === 's') {cntrl.moveBackward = true;}
-	if (e.key === 'w') {cntrl.moveForward = true;}
-	if (e.key === 'f') {cntrl.turnDown = true;}
-	if (e.key === 'r') {cntrl.turnUp = true;}
-	if (e.key === 'q') {cntrl.turnLeft = true;}
-	if (e.key === 'e') {cntrl.turnRight = true;}
-	if (e.key === 'z') {cntrl.spinLeft = true;}
-	if (e.key === 'c') {cntrl.spinRight = true;}
-	// New
-	if (e.key === 'j') {cntrl.moveLeftSel = true;}
-	if (e.key === 'l') {cntrl.moveRightSel = true;}
-	if (e.key === ',') {cntrl.moveDownSel = true;}
-	if (e.key === '8') {cntrl.moveUpSel = true;}
-	if (e.key === 'k') {cntrl.moveBackwardSel = true;}
-	if (e.key === 'i') {cntrl.moveForwardSel = true;}
-	if (e.key === 'h') {cntrl.turnDownSel = true;}
-	if (e.key === 'y') {cntrl.turnUpSel = true;}
-	if (e.key === 'u') {cntrl.turnLeftSel = true;}
-	if (e.key === 'o') {cntrl.turnRightSel = true;}
-	if (e.key === 'm') {cntrl.spinLeftSel = true;}
-	if (e.key === '.') {cntrl.spinRightSel = true;}
-	// // New
-}
+function keyDown(e) {setKeysTo(e, true);}
 // 0
-function keyUp(e) {
-	if (e.key === 'a') {cntrl.moveLeft = false;}
-	if (e.key === 'd') {cntrl.moveRight = false;}
-	if (e.key === 'x') {cntrl.moveDown = false;}
-	if (e.key === '2') {cntrl.moveUp = false;}
-	if (e.key === 's') {cntrl.moveBackward = false;}
-	if (e.key === 'w') {cntrl.moveForward = false;}
-	if (e.key === 'f') {cntrl.turnDown = false;}
-	if (e.key === 'r') {cntrl.turnUp = false;}
-	if (e.key === 'q') {cntrl.turnLeft = false;}
-	if (e.key === 'e') {cntrl.turnRight = false;}
-	if (e.key === 'z') {cntrl.spinLeft = false;}
-	if (e.key === 'c') {cntrl.spinRight = false;}
-	// New
-	if (e.key === 'j') {cntrl.moveLeftSel = false;}
-	if (e.key === 'l') {cntrl.moveRightSel = false;}
-	if (e.key === ',') {cntrl.moveDownSel = false;}
-	if (e.key === '8') {cntrl.moveUpSel = false;}
-	if (e.key === 'k') {cntrl.moveBackwardSel = false;}
-	if (e.key === 'i') {cntrl.moveForwardSel = false;}
-	if (e.key === 'h') {cntrl.turnDownSel = false;}
-	if (e.key === 'y') {cntrl.turnUpSel = false;}
-	if (e.key === 'u') {cntrl.turnLeftSel = false;}
-	if (e.key === 'o') {cntrl.turnRightSel = false;}
-	if (e.key === 'm') {cntrl.spinLeftSel = false;}
-	if (e.key === '.') {cntrl.spinRightSel = false;}
-	// // New
+function keyUp(e) {setKeysTo(e, false);}
+// 1
+function setKeysTo(e, val) {
+	if (e.key === 'a') {cntrl.moveLeft = val;}
+	if (e.key === 'd') {cntrl.moveRight = val;}
+	if (e.key === 'x') {cntrl.moveDown = val;}
+	if (e.key === '2') {cntrl.moveUp = val;}
+	if (e.key === 's') {cntrl.moveBackward = val;}
+	if (e.key === 'w') {cntrl.moveForward = val;}
+	if (e.key === 'f') {cntrl.turnDown = val;}
+	if (e.key === 'r') {cntrl.turnUp = val;}
+	if (e.key === 'q') {cntrl.turnLeft = val;}
+	if (e.key === 'e') {cntrl.turnRight = val;}
+	if (e.key === 'z') {cntrl.spinLeft = val;}
+	if (e.key === 'c') {cntrl.spinRight = val;}
+	if (e.key === 'j') {cntrl.moveLeftSel = val;}
+	if (e.key === 'l') {cntrl.moveRightSel = val;}
+	if (e.key === ',') {cntrl.moveDownSel = val;}
+	if (e.key === '8') {cntrl.moveUpSel = val;}
+	if (e.key === 'k') {cntrl.moveBackwardSel = val;}
+	if (e.key === 'i') {cntrl.moveForwardSel = val;}
+	if (e.key === 'h') {cntrl.turnDownSel = val;}
+	if (e.key === 'y') {cntrl.turnUpSel = val;}
+	if (e.key === 'u') {cntrl.turnLeftSel = val;}
+	if (e.key === 'o') {cntrl.turnRightSel = val;}
+	if (e.key === 'm') {cntrl.spinLeftSel = val;}
+	if (e.key === '.') {cntrl.spinRightSel = val;}
 }
 // Control Loop Function
 // 0
 function updatePos(pr, dt) {
+	updateCamTrans(pr, dt);
+	updateCamRot(pr, dt);
+	updateSelTrans();
+	updateSelRot();
+}
+// 1
+function updateCamTrans(pr, dt) {
 	if (cntrl.moveLeft) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(-250*dt, 0, 0));}
 	if (cntrl.moveRight) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(250*dt, 0, 0));}
 	if (cntrl.moveDown) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, -250*dt, 0));}
 	if (cntrl.moveUp) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 250*dt, 0));}
 	if (cntrl.moveBackward) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 0, 250*dt));}
 	if (cntrl.moveForward) {pr.camMatrix = m4.mult(pr.camMatrix, m4.translate(0, 0, -250*dt));}
+}
+// 1
+function updateCamRot(pr, dt) {
 	let RU = Math.PI/6*dt, rotX = 0, rotY = 0, rotZ = 0;
 	if (cntrl.turnDown) {rotX += RU;}
 	if (cntrl.turnUp) {rotX -= RU;}
@@ -86,7 +67,9 @@ function updatePos(pr, dt) {
 	if (cntrl.spinRight) {rotZ += RU;}
 	let quat = q4.eulerToQuat(rotX, rotY, rotZ);
 	pr.camMatrix = m4.mult(pr.camMatrix, q4.quatToRotMat(quat));
-	// New
+}
+// 1
+function updateSelTrans() {
 	if (cntrl.unitSelected.data.pos.spd) {
 		cntrl.unitSelected.data.pos.spd.x = 0;
 		cntrl.unitSelected.data.pos.spd.y = 0;
@@ -98,6 +81,9 @@ function updatePos(pr, dt) {
 		if (cntrl.moveBackwardSel) {cntrl.unitSelected.data.pos.spd.z += 25;}
 		if (cntrl.moveForwardSel) {cntrl.unitSelected.data.pos.spd.z += -25;}
 	}
+}
+// 1
+function updateSelRot() {
 	if (cntrl.unitSelected.data.rot.spd) {
 		cntrl.unitSelected.data.rot.spd.x = 0;
 		cntrl.unitSelected.data.rot.spd.y = 0;
@@ -109,5 +95,4 @@ function updatePos(pr, dt) {
 		if (cntrl.spinLeftSel) {cntrl.unitSelected.data.rot.spd.z += -Math.PI/20;}
 		if (cntrl.spinRightSel) {cntrl.unitSelected.data.rot.spd.z += Math.PI/20;}
 	}
-	// // New
 }

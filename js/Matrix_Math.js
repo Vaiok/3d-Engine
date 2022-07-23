@@ -1,7 +1,6 @@
 let v3 = {
-	subtract: function(a, b) {
-		return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];
-	},
+	copy: function(vec) {return [vec[0], vec[1], vec[2]];},
+	subtract: function(a, b) {return [a[0] - b[0], a[1] - b[1], a[2] - b[2]];},
 	cross: function(a, b) {
 		return [
 			a[1]*b[2] - a[2]*b[1],
@@ -26,6 +25,7 @@ let v3 = {
 	}
 };
 let v4 = {
+	copy: function(vec) {return [vec[0], vec[1], vec[2], vec[3]];},
 	clipToVec3: function(vector) {
 		return [vector[0], vector[1], vector[2]];
 	}
@@ -36,6 +36,13 @@ let m3 = {
 			1, 0, 0,
 			0, 1, 0,
 			0, 0, 1
+		];
+	},
+	copy: function(mat) {
+		return [
+			mat[0], mat[1], mat[2],
+			mat[3], mat[4], mat[5],
+			mat[6], mat[7], mat[8]
 		];
 	},
 	multVec: function (a, b) {
@@ -96,6 +103,14 @@ let m4 = {
 			0, 1, 0, 0,
 			0, 0, 1, 0,
 			0, 0, 0, 1
+		];
+	},
+	copy: function(mat) {
+		return [
+			mat[0], mat[1], mat[2], mat[3],
+			mat[4], mat[5], mat[6], mat[7],
+			mat[8], mat[9], mat[10], mat[11],
+			mat[12], mat[13], mat[14], mat[15]
 		];
 	},
 	multVec: function (a, b) {
@@ -210,7 +225,6 @@ let m4 = {
 			matrix[3], matrix[7], matrix[11], matrix[15]
 		];
 	},
-
 	clipToMat3: function(matrix) {
 		return [
 			matrix[0], matrix[1], matrix[2],
@@ -218,7 +232,6 @@ let m4 = {
 			matrix[8], matrix[9], matrix[10]
 		];
 	},
-
 	orthographic: function(left, right, bottom, top, near, far) {
 		return [
 			2/(right-left), 0, 0, 0,
@@ -249,12 +262,9 @@ let m4 = {
 	}
 };
 let q4 = {
-	identity: function() {
-		return [1, 0, 0, 0];
-	},
-	invert: function(quat) {
-		return [quat[0], -quat[1], -quat[2], -quat[3]];
-	},
+	identity: function() {return [1, 0, 0, 0];},
+	copy: function(quat) {return [quat[0], quat[1], quat[2], quat[3]];},
+	invert: function(quat) {return [quat[0], -quat[1], -quat[2], -quat[3]];},
 	mult: function(a, b) {
 		return [
 			a[0]*b[0] - a[1]*b[1] - a[2]*b[2] - a[3]*b[3],
@@ -283,22 +293,47 @@ let q4 = {
 		];
 	},
 	quatToEulerX: function(quat) {
-		return Math.atan2(2*(quat[0]*quat[1] + quat[2]*quat[3]), quat[0]**2 - quat[1]**2 - quat[2]**2 + quat[3]**2);
+		if (Math.abs(2*(quat[0]*quat[2] - quat[1]*quat[3])) < 0.9999999) {
+			return Math.atan2(2*(quat[0]*quat[1] + quat[2]*quat[3]), 1 - 2*quat[1]**2 - 2*quat[2]**2);
+		} else {return 0;}
 	},
 	quatToEulerY: function(quat) {
 		return Math.asin(2*(quat[0]*quat[2] - quat[1]*quat[3]));
 	},
 	quatToEulerZ: function(quat) {
-		return Math.atan2(2*(quat[0]*quat[3] + quat[1]*quat[2]), quat[0]**2 + quat[1]**2 - quat[2]**2 - quat[3]**2);
+		if (Math.abs(2*(quat[0]*quat[2] - quat[1]*quat[3])) < 0.9999999) {
+			return Math.atan2(2*(quat[0]*quat[3] + quat[1]*quat[2]), 1 - 2*quat[2]**2 - 2*quat[3]**2);
+		} else {
+			return Math.atan2(2*(-quat[1]*quat[2] - quat[0]*quat[3]), 1 - 2*quat[1]**2 - 2*quat[3]**2);
+		}
 	},
+
+	// New
+	quatToEuler2X: function(quat) {
+		return Math.asin(quat[1])*2;
+	},
+	quatToEuler2Y: function(quat) {
+		return Math.asin(quat[2])*2;
+	},
+	quatToEuler2Z: function(quat) {
+		return Math.asin(quat[3])*2;
+	},
+	// // New
+
 	quatToRotMat: function(quat) {
 		return [
-			quat[0]**2 + quat[1]**2 - quat[2]**2 - quat[3]**2, 2*(quat[1]*quat[2]) - 2*(quat[0]*quat[3]),
-			2*(quat[1]*quat[3]) + 2*(quat[0]*quat[2]), 0,
-			2*(quat[1]*quat[2]) + 2*(quat[0]*quat[3]), quat[0]**2 - quat[1]**2 + quat[2]**2 - quat[3]**2,
-			2*(quat[2]*quat[3]) - 2*(quat[0]*quat[1]), 0,
-			2*(quat[1]*quat[3]) - 2*(quat[0]*quat[2]), 2*(quat[2]*quat[3]) + 2*(quat[0]*quat[1]),
-			quat[0]**2 - quat[1]**2 - quat[2]**2 + quat[3]**2, 0,
+			1 - 2*quat[2]**2 - 2*quat[3]**2,
+			2*quat[1]*quat[2] - 2*quat[0]*quat[3],
+			2*quat[1]*quat[3] + 2*quat[0]*quat[2],
+			0,
+			2*(quat[1]*quat[2]) + 2*(quat[0]*quat[3]),
+			1 - 2*quat[1]**2 - 2*quat[3]**2,
+			2*(quat[2]*quat[3]) - 2*(quat[0]*quat[1]),
+			0,
+			2*(quat[1]*quat[3]) - 2*(quat[0]*quat[2]),
+			2*(quat[2]*quat[3]) + 2*(quat[0]*quat[1]),
+			1 - 2*quat[1]**2 - 2*quat[2]**2,
+			0,
 			0, 0, 0, 1
 		];
 	},

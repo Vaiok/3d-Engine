@@ -29,7 +29,7 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
 									{r: 1, g: 0, b: 0});// Left Shoulder2
 	partsArr.sat[1].sat[0].sat[0] = makeBlockData('joint', {x: BU*1, y: BU*2, z: BU*2}, {x: -BU*1, y: 0, z: 0},
-									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: -Math.PI/6, z: -Math.PI/2}, max: {x: 0, y: Math.PI/2, z: Math.PI/2}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: -Math.PI/6, z: -Math.PI/2}, max: {x: Math.PI/2, y: Math.PI*3/4, z: Math.PI/2}},
 									{r: 1, g: 0, b: 0});// Left Shoulder3
 	partsArr.sat[1].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*4, y: BU*2, z: BU*2}, {x: -BU*2.5, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {r: 1, g: 0, b: 0});// Left Arm1
 	partsArr.sat[1].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*2, y: BU*2, z: BU*2}, {x: -BU*2, y: 0, z: 0},
@@ -44,13 +44,13 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 																{r: 1, g: 0, b: 0});// Left Wrist2
 	partsArr.sat[1].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*2, y: BU*2, z: BU*2}, {x: -BU*1.5, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Left Hand
 	partsArr.sat[2] = makeBlockData('joint', {x: BU*1, y: BU*2, z: BU*2}, {x: BU*3.5, y: BU*4, z: 0},
-									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: -Math.PI/2, z: 0}, max: {x: 0, y: Math.PI/4, z: 0}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
 									{r: 1, g: 0, b: 0});// Right Shoulder1
 	partsArr.sat[2].sat[0] = makeBlockData('joint', {x: BU*1, y: BU*2, z: BU*2}, {x: BU*1, y: 0, z: 0},
-									{x: 0, y: 0, z: Math.PI/2, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: -Math.PI/2}, max: {x: 0, y: 0, z: Math.PI/2}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
 									{r: 1, g: 0, b: 0});// Right Shoulder2
 	partsArr.sat[2].sat[0].sat[0] = makeBlockData('joint', {x: BU*1, y: BU*2, z: BU*2}, {x: BU*1, y: 0, z: 0},
-									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: -Math.PI*3/4, z: -Math.PI/2}, max: {x: Math.PI/2, y: Math.PI/4, z: Math.PI/2}},
 									{r: 1, g: 0, b: 0});// Right Shoulder3
 	partsArr.sat[2].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*4, y: BU*2, z: BU*2}, {x: BU*2.5, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {r: 1, g: 0, b: 0});// Right Arm1
 	partsArr.sat[2].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*2, y: BU*2, z: BU*2}, {x: BU*2, y: 0, z: 0},
@@ -66,7 +66,7 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 	partsArr.sat[2].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*2, y: BU*2, z: BU*2}, {x: BU*1.5, y: 0, z: 0}, {x: 0, y: 0, z: 0}, {r: 1, g: 0.6, b: 0.6});// Right Hand
 	partsArr.sat[3] = makeBlockData('block', {x: BU*7, y: BU*3, z: BU*4}, {x: 0, y: -BU*6.5, z: BU/2}, {x: 0, y: 0, z: 0}, {r: 0, g: 0, b: 1});//Hips
 	partsArr.sat[3].sat[0] = makeBlockData('joint', {x: BU*3, y: BU, z: BU*3}, {x: -BU*2, y: 0, z: -BU/2},
-									{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: -Math.PI/2, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
 									{r: 0, g: 0, b: 1});// Left Hip Joint1
 	partsArr.sat[3].sat[0].sat[0] = makeBlockData('joint', {x: BU*3, y: BU, z: BU*3}, {x: 0, y: -BU, z: 0},
 									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: 0, y: 0, z: Math.PI/3}},
@@ -76,15 +76,15 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 									{r: 0, g: 0, b: 1});// Left Hip Joint3
 	partsArr.sat[3].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*5, z: BU*3}, {x: 0, y: -BU*3, z: 0}, {x: 0, y: 0, z: 0}, {r: 0, g: 0, b: 1});// Left Leg1
 	partsArr.sat[3].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*3, y: BU*1, z: BU*3}, {x: 0, y: -BU*2, z: 0},
-												{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: Math.PI/2, y: 0, z: 0}},
+												{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: Math.PI/2, y: 0, z: 0}},
 												{r: 0, g: 0, b: 1});// Left Knee
 	partsArr.sat[3].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*5, z: BU*3}, {x: 0, y: -BU*3, z: 0}, {x: 0, y: 0, z: 0}, {r: 0, g: 0, b: 1});// Left Leg2
 	partsArr.sat[3].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*2, y: BU*2, z: BU*2}, {x: 0, y: -BU*2.5, z: 0},
-																{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: -Math.PI/4, y: 0, z: 0}, max: {x: Math.PI/3, y: 0, z: 0}},
+																{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/4, y: 0, z: 0}, max: {x: Math.PI/3, y: 0, z: 0}},
 																{r: 1, g: 1, b: 1});// Left Ankle
 	partsArr.sat[3].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*2, z: BU*5}, {x: 0, y: -BU*2, z: -BU}, {x: 0, y: 0, z: 0}, {r: 0.5, g: 0.5, b: 0.5});// Left Foot
 	partsArr.sat[3].sat[1] = makeBlockData('joint', {x: BU*3, y: BU, z: BU*3}, {x: BU*2, y: 0, z: -BU/2},
-									{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: -Math.PI/2, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
+									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/2, y: 0, z: 0}, max: {x: 0, y: 0, z: 0}},
 									{r: 0, g: 0, b: 1});// Right Hip Joint1
 	partsArr.sat[3].sat[1].sat[0] = makeBlockData('joint', {x: BU*3, y: BU, z: BU*3}, {x: 0, y: -BU, z: 0},
 									{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: -Math.PI/3}, max: {x: 0, y: 0, z: 0}},
@@ -94,11 +94,11 @@ function buildEntity(posX, posY, posZ, posSpdX, posSpdY, posSpdZ, rotX, rotY, ro
 									{r: 0, g: 0, b: 1});// Right Hip Joint3
 	partsArr.sat[3].sat[1].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*5, z: BU*3}, {x: 0, y: -BU*3, z: 0}, {x: 0, y: 0, z: 0}, {r: 0, g: 0, b: 1});// Right Leg1
 	partsArr.sat[3].sat[1].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*3, y: BU*1, z: BU*3}, {x: 0, y: -BU*2, z: 0},
-												{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: Math.PI/2, y: 0, z: 0}},
+												{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: 0, y: 0, z: 0}, max: {x: Math.PI/2, y: 0, z: 0}},
 												{r: 0, g: 0, b: 1});// Right Knee
 	partsArr.sat[3].sat[1].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*5, z: BU*3}, {x: 0, y: -BU*3, z: 0}, {x: 0, y: 0, z: 0}, {r: 0, g: 0, b: 1});// Right Leg2
 	partsArr.sat[3].sat[1].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('joint', {x: BU*2, y: BU*2, z: BU*2}, {x: 0, y: -BU*2.5, z: 0},
-																{x: 0, y: 0, z: 0, spd: {x: rndv(), y: 0, z: 0}, min: {x: -Math.PI/4, y: 0, z: 0}, max: {x: Math.PI/3, y: 0, z: 0}},
+																{x: 0, y: 0, z: 0, spd: {x: 0, y: 0, z: 0}, min: {x: -Math.PI/4, y: 0, z: 0}, max: {x: Math.PI/3, y: 0, z: 0}},
 																{r: 1, g: 1, b: 1});// Right Ankle
 	partsArr.sat[3].sat[1].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0].sat[0] = makeBlockData('block', {x: BU*3, y: BU*2, z: BU*5}, {x: 0, y: -BU*2, z: -BU}, {x: 0, y: 0, z: 0}, {r: 0.3, g: 0.3, b: 0.3});// Right Foot
 	createObjectMatrices(partsArr);
